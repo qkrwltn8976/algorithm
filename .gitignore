@@ -1,2 +1,8 @@
 *.exe
 *.out
+*.out.dSYM
+*.dSYM
+.vscode
+.DS_Store
+.gitattributes
+.gitignore
