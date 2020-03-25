@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "venv/bin/python2",
+    "files.associations": {
+        "new": "cpp",
+        "iostream": "cpp"
+    }
+}
