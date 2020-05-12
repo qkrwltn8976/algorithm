@@ -28,6 +28,5 @@ vector<int> solution(vector<int> answers) {
     if(max == cnt3)
         answer.push_back(3);
     
-    
     return answer;
 }
