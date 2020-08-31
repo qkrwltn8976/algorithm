@@ -3,65 +3,119 @@
 */
 
 #include <iostream>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
 
 int n, m;
-vector<int> arr, arr2, cnt;
+int *arr;
 
-void binarySearch(int first, int last, int k)
+int binarySearch(int first, int last, int sum, int k)
 {
-    int mid = 1;
+    int mid = 1, result;
 
     mid = (first + last) / 2;
 
     if (first <= last)
     {
-        if (arr[mid] == arr2[k])
+        if (arr[mid] < k)
+            result = binarySearch(mid + 1, last, sum,k);
+        else if (arr[mid] > k)
+            result = binarySearch(first, mid - 1, sum, k);
+        else
         {
-            cnt[k]++;
+            result = binarySearch(mid + 1, last, sum, k);
+            result += binarySearch(first, mid - 1, sum, k);
+            result++;
         }
-        binarySearch(mid + 1, last, k);
-        binarySearch(first, mid - 1, k);
-    }
-
-    return;
+        return result;
+    } else 
+        return sum;
 }
 
 int main()
 {
     cin.tie(0);
-    cin >> n;
+    scanf("%d", &n);
 
-    arr.resize(n);
-
+    arr = new int[n];
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
+        scanf("%d", &arr[i]);
     }
 
-    sort(arr.begin(), arr.end());
+    sort(arr, arr+n);
 
-    cin >> m;
-    arr2.resize(m);
-    cnt.resize(m);
+    scanf("%d", &m);
 
     for (int i = 0; i < m; i++)
     {
-        cin >> arr2[i];
-    }
-
-    for (int i = 0; i < m; i++)
-    {
-        binarySearch(0, n - 1, i);
-    }
-
-    for (int i = 0; i < m; i++)
-    {
-        cout << cnt[i] << " ";
+        int k;
+        scanf("%d", &k);
+        int result = binarySearch(0, n - 1, 0, k);
+        printf("%d ", result);
     }
 
     return 0;
 }
+
+/**
+ * 시간 초과
+ * 1) c++ 함수 사용x
+ * 2) vector -> array
+ * 
+ * 해결 X
+*/
+
+// #include <iostream>
+// #include <algorithm>
+
+// using namespace std;
+
+// int n, m;
+// int *arr, *arr2, *cnt;
+
+// void search(int k)
+// {
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (arr[i] == arr2[k])
+//         {
+//             cnt[k]++;
+//         }
+//         else
+//         {
+//             if (cnt[k] != 0)
+//             {
+
+//                 break;
+//             }
+//         }
+//     }
+//     printf("%d ", cnt[k]);
+//     return;
+// }
+
+// int main()
+// {
+//     scanf("%d", &n);
+
+//     arr = new int[n];
+//     for (int i = 0; i < n; i++)
+//     {
+//         scanf("%d", &arr[i]);
+//     }
+
+//     sort(arr, arr+n);
+
+//     cin >> m;
+//     arr2 = new int[m];
+//     cnt = new int[m];
+//     for (int i = 0; i < m; i++)
+//     {
+//         scanf("%d", &arr2[i]);
+//         search(i);
+//     }
+
+//     return 0;
+// }
