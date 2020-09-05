@@ -17,8 +17,9 @@ int N, M, V;
 void DFS(int idx)
 {
     cout << idx << " ";
-    for(int i=1; i<=N; i++) {
-        if(adjacent[idx][i] && !visited[i])
+    for (int i = 1; i <= N; i++)
+    {
+        if (adjacent[idx][i] && !visited[i])
         {
             visited[i] = 1;
             DFS(i);
@@ -38,13 +39,10 @@ void BFS(int idx)
 
         cout << idx << " ";
 
-        for(int i=1; i<=N; i++)
+        if (adjacent[idx][i] && !visited[i])
         {
-            if(adjacent[idx][i] && !visited[i])
-            {
-                visited[i] = 1;
-                q.push(i);
-            }
+            visited[i] = 1;
+            q.push(i);
         }
     }
 }
@@ -65,7 +63,7 @@ int main()
     DFS(V);
 
     cout << endl;
-    
+
     memset(visited, false, sizeof(visited));
     BFS(V);
 
