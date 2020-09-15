@@ -8,6 +8,8 @@
 
 using namespace std;
 
+int dial[26] = { 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9 };
+
 int main()
 {
     cin.tie(0);
@@ -22,11 +24,15 @@ int main()
         int num = 0;
         if (s[i] >= 65 && s[i] <= 90)
         {
-            num = ceil((s[i] - 65) / 3) + 2;
+            num = dial[s[i] - 65] + 1;
         } 
+        else 
+        {
+            num = 11;
+        }
 
-        cout << num << " ";
-        answer += ceil(num);
+        // cout << num << " ";
+        answer += num;
     }
 
     cout << answer << "\n";
