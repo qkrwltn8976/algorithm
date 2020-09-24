@@ -33,12 +33,12 @@ int main()
                 break;
             }
         }
-        cout << s << endl;
+
         if (palin)
             cout << "Yes\n";
         else
             cout << "No\n";
-        cout << "=======\n";
+
     }
 
     return 0;
