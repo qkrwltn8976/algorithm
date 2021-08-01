@@ -35,7 +35,7 @@ int main()
     sort(a.begin(), a.end());
     sort(b.begin(), b.end());
     reverse(b.begin(), b.end());
-
+a.
     int sum = 0;
     for (int i = 0; i < T; i++)
     {

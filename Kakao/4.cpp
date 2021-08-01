@@ -33,6 +33,8 @@ void BFS(int x, int y)
             {
                 if (arr[ny][nx] == 0 && dist[ny][nx] < 1)
                 {
+                    if(dx[i]==1 && )
+                    if(dy[i]==1 && arr[ny][nx+1]==1)
                     q.push(make_pair(nx, ny));
                     dist[ny][nx] = dist[y][x] + 1;
                     cout << "!!" << endl;

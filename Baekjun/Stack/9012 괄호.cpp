@@ -32,7 +32,7 @@ int main()
                 st.push(s[i]);
             }
         }
-
+    st.
         if (st.empty())
             cout << "YES" << endl;
         else
