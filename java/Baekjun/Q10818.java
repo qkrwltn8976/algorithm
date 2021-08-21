@@ -15,8 +15,8 @@ public class Q10818 {
         int next;
         while(st.hasMoreTokens()) {
             next = Integer.parseInt(st.nextToken());
-            max = (next >= max) ? next : max;
-            min = (next < max) ? next : max;
+            max = (next > max) ? next : max;
+            min = (next < min) ? next : min;
         }
 
         System.out.println(min + " " + max);
