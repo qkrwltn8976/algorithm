@@ -43,7 +43,7 @@ public class Q2644 {
             int[] node = q.poll();
             for (int i=1; i<=n; i++) {
                 int n_idx = node[0];
-                int n_cnt = node[1];
+                int n_cnt = node[1]; // cnt 초기화 (누적 방지)
                 if (n_idx == b) {
                     return n_cnt;
                 }
