@@ -13,8 +13,8 @@ public class Q9613 {
         while (T-- > 0) {
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             int n = Integer.parseInt(st.nextToken());
-            int[] map = new int[n];
-            int sum = 0;
+            long[] map = new long[n]; // 입력으로 주어지는 수는 1,000,000을 넘지 않는다
+            long sum = 0;
             for (int i=0; i<n; i++) {
                 map[i] = Integer.parseInt(st.nextToken());
             }
@@ -28,9 +28,9 @@ public class Q9613 {
         }
     }
 
-    public static int GDC(int a, int b) {   
+    public static long GDC(long a, long b) {   
         while (b != 0) {
-            int r = a % b;
+            long r = a % b;
             a = b;
             b = r;
         }
