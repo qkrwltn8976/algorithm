@@ -20,7 +20,7 @@ public class Q17413 {
            
             if (isTag || c == ' ' || c == '\n') {
                 while (!stack.isEmpty()) {
-                    sb.append(stack.pop());
+                    sb.append(stack.pop()); // 단어 모두 뒤집기
                 }
                 if(c != '\n') sb.append(c);
             } else {
