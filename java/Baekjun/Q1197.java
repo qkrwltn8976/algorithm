@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Q1197 {
@@ -23,65 +22,93 @@ public class Q1197 {
      * 3. 사이클을 형성하는 경우 간선을 포함하지 않음
      * 
      * [Union Find 합집합 찾기 == Disjoint Set 서로소 집합 알고리즘]
-     * 여러 개의 노드가 존재할 때 두 개의 노드를 선택해서 두 노드가 서로 같은 그래프에 속하는지 판별
+     * 여러 개의 노드가 존재할 때 두 개의 노드를 선택해서 두 노드가 서로 같은 그래프에 속하는지 판별    
      * */ 
     // 정점의 개수 V(1 ≤ V ≤ 10,000)와 간선의 개수 E(1 ≤ E ≤ 100,000)
     static int V, E;
-    static int[][] map;
-    static boolean[] visited;
+    static int[] parent;
     static int ans;
-    static ArrayList<Integer> arr = new ArrayList<>();
-    static PriorityQueue<Integer> pq = new PriorityQueue<>();
+    static ArrayList<Edge> edgeList = new ArrayList<>();
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         V = Integer.parseInt(st.nextToken());
         E = Integer.parseInt(st.nextToken());
 
-        map = new int[V+1][V+1];
-        visited = new boolean[V+1];
+        //parent 초기화
+        parent = new int[V+1];
 
+        for (int i=1; i<=V; i++) {
+            parent[i] = i;
+        }
+        
+        //연결노드 초기화
         for (int i=0; i<E; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
-            map[a][b] = c;
-            map[b][a] = c;
+            edgeList.add(new Edge(a, b, c));
         }
-        
-        for (int i=1; i<=E; i++) {
-            visited[i] = true;
-            DFS(i, 1);
-            visited[i] = false;
-        }
-        
-        Collections.sort(arr);
 
-        if (!arr.isEmpty()) {
-            System.out.println(arr.get(0));
+        Collections.sort(edgeList); // 가중치 오름차순 정렬
+
+        // 최소신장트리 탐색
+        for (int i=0; i<edgeList.size(); i++) {
+            Edge edge = edgeList.get(i);
+            if (!isSameParent(edge.start, edge.end)) { // 3. 사이클을 형성하는 경우 간선을 포함하지 않음
+                ans += edge.weight;
+                union(edge.start, edge.end); // 연결
+            }
+        }
+        
+        if (!edgeList.isEmpty()) {
+            System.out.println(ans);
         }
     }
 
-    public static void DFS(int prev, int idx) {
-        if (idx == E) {
-            arr.add(ans);
-            return;
-        }
+    // 두 부모 노드를 합치는 함수
+    private static void union(int x, int y) {
+        x = getParent(x);
+        y = getParent(y);
 
-        for (int i=1; i<=E; i++) {
-            if (visited[i]) continue;
-            ans += map[prev][i];
-            visited[i] = true;
-            DFS(i, idx+1);
-            visited[i] = false;
-            ans = 0;
+        if (x < y) {
+            parent[y] = x; // 더 작은 값으로 부모 설정
+        } else {
+            parent[x] = y;
         }
     }
 
-    static class Edge {
+    // 부모 노드를 찾는 함수
+    private static int getParent(int x) {
+        if (parent[x] == x) {
+            return x;
+        } else {
+            return parent[x] = getParent(parent[x]);
+        }
+    }
+
+    // 같은 부모를 가지는지 확인하는 함수
+    private static boolean isSameParent(int x, int y) {
+        x = getParent(x);
+        y = getParent(y);
+        return x == y;
+    }
+
+    static class Edge implements Comparable<Edge>{
         int start;
         int end;
         int weight;
+
+        public Edge(int start, int end, int weight) {
+            this.start = start;
+            this.end = end;
+            this.weight = weight;
+        }
+
+        @Override
+        public int compareTo(Edge o) {
+            return weight - o.weight;
+        }
     }
 }
