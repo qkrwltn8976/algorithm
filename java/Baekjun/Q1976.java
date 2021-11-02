@@ -30,12 +30,13 @@ public class Q1976 {
         }
         
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int start = Integer.parseInt(st.nextToken());
+        int start = find(Integer.parseInt(st.nextToken()));
 
         for (int i=1; i<M; i++) {
             int tmp = Integer.parseInt(st.nextToken());
             // 맨 처음 출발 도시와 연결되어있지 않은 도시가 있으면
             // 여행 계획이 불가능한 것임.
+            // 모든 노드의 부모가 일치해야 함
             if (start != find(tmp)) {
                 System.out.println("NO");
                 return;
@@ -48,11 +49,13 @@ public class Q1976 {
         a = find(a);
         b = find(b);
 
-        if (a < b) {
-            parents[b] = a;
-        } else {
-            parents[a] = b;
-        }
+        if (a != b) {
+            if (a < b) {
+                parents[b] = a;
+            } else {
+                parents[a] = b;
+            }
+        }   
     }
 
     private static int find(int a) {
