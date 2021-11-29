@@ -28,10 +28,10 @@ def bfs(x, y):
             
             if 0 <= nx < n and 0 <= ny < m:
                 if board[nx][ny] == 1 and not visited[nx][ny]:
-                    q.append((nx, n))
+                    q.append((nx, ny))
                     visited[nx][ny] = 1
                     ans += 1
-    return ans+1
+    return ans
 
 val = 0
 for i in range(n):
