@@ -1,2 +1,2 @@
-a, b = input().split()
+a, b = map(int, input().split())
 print(int(b-a), b)

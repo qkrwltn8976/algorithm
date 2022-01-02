@@ -10,4 +10,3 @@ def gcd(a, b):
 a, b = map(int, input().split(":"))
 n = gcd(a, b)
 print("{}:{}".format(a//n, b//n))
-#print(a%n+" "+b%n)
