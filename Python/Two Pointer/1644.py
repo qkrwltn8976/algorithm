@@ -2,7 +2,7 @@ n = int(input())
 isprime = [False, False] + [True] * (n-1) # 1, 2는 소수 아님
 li = []
 
-for i in range(2, n+1):
+for i in range(2, n+1): # 에라토스테네스의 체
     if isprime[i]:
         li.append(i)
     for j in range(i*i, n+1, i): # 4, 6, 8.. 9, 12, 15...
