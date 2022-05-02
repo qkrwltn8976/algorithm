@@ -28,7 +28,7 @@ public class Q2276 {
             st = new StringTokenizer(br.readLine(), " ");
             while (n-- > 0) {
                 int key = Integer.parseInt(st.nextToken());
-                bw.write((map.containsKey(key) ? 1 : 0) + "\n");
+                bw.write((map.containsKey(key) ? 1 : 0) + "\n"); // 시간초과 문제 문자열 출력을 System.out에서 BufferedWriter로 변경
             }
         }
 
