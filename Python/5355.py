@@ -12,5 +12,5 @@ for _ in range(t):
             result += 5
         else:
             result -= 7
-    print('%.2f' %(result))
+    print('%.2f' %())
 
